@@ -1,0 +1,43 @@
+﻿@model List<ProductsValidation.Models.Product>
+
+@{
+    ViewData["Title"] = "Edit All";
+    var i = 0;
+}
+
+<h1>Edit All</h1>
+<hr />
+
+@using (Html.BeginForm("EditAll", "Products", FormMethod.Post))
+{
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.TextBox("products[" + @i + "].Id", Model[i].Id, new { @readonly = "readonly" })</td>
+                <td>@Html.TextBox("products[" + @i + "].Name", Model[i].Name, new { @readonly = "readonly" })</td>
+                <td>@Html.TextBox("products[" + @i + "].Price", Model[i].Price)</td>
+                @* <td>@Html.TextBoxFor(modelItem => item.Id, new {@readonly = true})</td> *@
+                @* <td>@Html.TextBoxFor(modelItem => item.Name, new {@readonly = true})</td> *@
+                @* <td>@Html.TextBoxFor(modelItem => item.Price)</td> *@
+            </tr>
+            i++;
+        }
+        </tbody>
+    </table>
+    <input type="submit" value="Submit" class="btn btn-primary">
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
